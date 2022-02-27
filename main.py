@@ -26,7 +26,7 @@ def api():
                 print(f"Poslání dat proběhlo v pořádku - odpověď serveru kód {call2}.")
                 exit(0)
             else:
-                print(f"Při odeslání dat došlo k chybě - odpověď serveru kód {call2}.")
+                print(f"Při odeslání dat nastala chyba odpovědi serveru - kód {call2}.")
                 exit(1)
         else:
             print("Nesprávný email")
