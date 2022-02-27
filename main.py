@@ -5,9 +5,9 @@ import re
 def api():
     api_key = "8743f41d-98c6-4578-9d7b-611af96a16ba"
     response = requests.get("https://ralph.motionlab.io/api/interviewInfo?apiKey=" + api_key)
-    call1 = response.json()
     call1_status = response.status_code
     if call1_status == 200:
+        call1 = response.json()
         print(f"První volání proběhlo úspěšně, odpověď serveru kód {call1_status}, výsledek: {call1}")
     else:
         print(f"Nastala chyba odpovědi serveru - kód {call1_status}")
