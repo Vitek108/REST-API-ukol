@@ -5,12 +5,11 @@ import re
 def api():
     api_key = "8743f41d-98c6-4578-9d7b-611af96a16ba"
     response = requests.get("https://ralph.motionlab.io/api/interviewInfo?apiKey=" + api_key)
-    call1_status = response.status_code
-    if call1_status == 200:
+    if response.status_code == 200:
         call1 = response.json()
-        print(f"První volání proběhlo úspěšně, odpověď serveru kód {call1_status}, výsledek: {call1}")
+        print(f"První volání proběhlo úspěšně, odpověď serveru kód {response.status_code}, výsledek: {call1}")
     else:
-        print(f"Nastala chyba odpovědi serveru - kód {call1_status}")
+        print(f"Nastala chyba odpovědi serveru - kód {response.status_code}")
         exit(1)
     while True:
         regex = r'\b[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Z|a-z]{2,}\b'
@@ -21,12 +20,11 @@ def api():
             access_token = call1['authorization'].get('access_token')
             response2 = requests.post("https://ralph.motionlab.io/api/interviewTest", json=send_data,
                                       headers={"Authorization": f"Bearer {access_token}"})
-            call2 = response2.status_code
-            if call2 == 200:
-                print(f"Poslání dat proběhlo v pořádku - odpověď serveru kód {call2}.")
+            if response2.status_code == 200:
+                print(f"Poslání dat proběhlo v pořádku - odpověď serveru kód {response2.status_code}.")
                 exit(0)
             else:
-                print(f"Při odeslání dat nastala chyba odpovědi serveru - kód {call2}.")
+                print(f"Při odeslání dat nastala chyba odpovědi serveru - kód {response2.status_code}.")
                 exit(1)
         else:
             print("Nesprávný email")
